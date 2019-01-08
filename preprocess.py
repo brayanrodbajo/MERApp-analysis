@@ -84,7 +84,7 @@ def process(data):
         (up_d[index], up[index], down_d[index],down[index]) = m_scrolls(scroll)
 
 
-    return (int(n_secs*3), errs[0], ics[0],up_d[0], up[0], down_d[0], down[0], errs[1], ics[1], up_d[1], up[1], down_d[1], down[1], errs[2], ics[2], up_d[2], up[2], down_d[2], down[2])
+    return (int(n_secs*3), errs[0], ics[0],up_d[0], up[0], down_d[0], down[0], 0, 0, errs[1], ics[1], up_d[1], up[1], down_d[1], down[1], 0, 0, errs[2], ics[2], up_d[2], up[2], down_d[2], down[2])
 
 def ret_song(data):
     path_song = data[0][2]
@@ -110,23 +110,31 @@ def put_tag(tags, songs_names):
     return result
 
 if __name__ == '__main__':
-    filename = 'tags.csv'
+    # filename = 'tags.csv'
+    # with open(filename, "r") as f:
+    #     so = csv.reader(f, delimiter=',')
+    #     musical_info = []
+    #     for row in so:
+    #         musical_info.append(row)
+    #
+    # filename = 'songs_names.csv'
+    # with open(filename, "r") as f:
+    #     so = csv.reader(f, delimiter=',')
+    #     songs_names = []
+    #     for row in so:
+    #         songs_names.append(row)
+    #
+    #     result = put_tag(musical_info, songs_names)
+    #     # print(' '.join(map(str,result)))
+    # with open('some.csv', 'w', newline='') as f:
+    #     writer = csv.writer(f, quotechar="'")
+    #     for row in result:
+    #         writer.writerow(row)
+    filename = 'data.csv'
     with open(filename, "r") as f:
         so = csv.reader(f, delimiter=',')
-        musical_info = []
+        data = []
         for row in so:
-            musical_info.append(row)
-
-    filename = 'songs_names.csv'
-    with open(filename, "r") as f:
-        so = csv.reader(f, delimiter=',')
-        songs_names = []
-        for row in so:
-            songs_names.append(row)
-
-        result = put_tag(musical_info, songs_names)
-        # print(' '.join(map(str,result)))
-    with open('some.csv', 'w', newline='') as f:
-        writer = csv.writer(f, quotechar="'")
-        for row in result:
-            writer.writerow(row)
+            data.append(row)
+        result = process(data)
+        print(" ".join(map(str,result)))
